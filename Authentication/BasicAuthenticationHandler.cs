@@ -12,6 +12,7 @@ using Microsoft.Extensions.Internal;
 using robot_controller_api.Persistence; // Important for UserDataAccess
 using Microsoft.EntityFrameworkCore; // Important for EF queries
 namespace robot_controller_api.Authentication;
+
 public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {
     private readonly UserDataAccess _db;

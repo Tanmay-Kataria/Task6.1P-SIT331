@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using robot_controller_api;
 using robot_controller_api.Persistence;
+using Microsoft.AspNetCore.Authorization;
 
 namespace robot_controller_api.Controllers
 {
@@ -46,21 +47,31 @@ namespace robot_controller_api.Controllers
 
         // 4. POST /users - Add a new user (register new users)
         [HttpPost]
-        public async Task<ActionResult<UserModel>> AddUser(UserModel user)
-        {
-            // Assume the incoming user.PasswordHash property contains the plain text password.
-            var plainPassword = user.PasswordHash; // plain text password provided by client
-            var pwHash = BCrypt.Net.BCrypt.HashPassword(plainPassword);
-            user.PasswordHash = pwHash;
-            
-            // Set created and modified dates.
-            user.CreatedDate = DateTime.UtcNow;
-            user.ModifiedDate = DateTime.UtcNow;
+[AllowAnonymous]           // typically, registration is open
+public async Task<ActionResult<UserModel>> AddUser([FromBody] RegisterUserDto dto)
+{
+    if (!ModelState.IsValid)
+        return BadRequest(ModelState);
 
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetUserById), new { id = user.Id }, user);
-        }
+    // Map the DTO into your EF entity
+    var user = new UserModel
+    {
+        FirstName     = dto.FirstName,
+        LastName      = dto.LastName,
+        Email         = dto.Email,
+        PasswordHash  = BCrypt.Net.BCrypt.HashPassword(dto.Password),
+        Description   = dto.Description,
+        Role          = dto.Role,
+        CreatedDate   = DateTime.UtcNow,
+        ModifiedDate  = DateTime.UtcNow
+    };
+
+    _context.Users.Add(user);
+    await _context.SaveChangesAsync();
+
+    return CreatedAtAction(nameof(GetUserById), new { id = user.Id }, user);
+}
+
 
         // 5. PUT /users/{id} - Update user (disregarding email and password)
         [HttpPut("{id}")]

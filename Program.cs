@@ -4,7 +4,6 @@ using System.Reflection;
 using robot_controller_api.Authentication;
 using Microsoft.AspNetCore.Authentication; // Needed for AuthenticationSchemeOptions
 using System.Security.Claims; // Needed for ClaimTypes
-using Microsoft.EntityFrameworkCore.SqlServer; // Needed for UseSqlServer
 using Microsoft.EntityFrameworkCore; // Needed for DbContext
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +24,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 // Remove the manual constructor override:
 builder.Services.AddScoped<RobotCommandDataAccess>(); 
 builder.Services.AddScoped<MapDataAccess>(); 
+
 builder.Services.AddAuthentication("BasicAuthentication")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(
         "BasicAuthentication", options => { });
@@ -35,7 +35,8 @@ policy.RequireClaim(ClaimTypes.Role, "Admin"));
 options.AddPolicy("UserOnly", policy =>
 policy.RequireClaim(ClaimTypes.Role, "Admin", "User"));
 });
-builder.Services.AddAuthorization(); // Add default authorization services
+
+//builder.Services.AddAuthorization(); // Add default authorization services
 
 builder.Services.AddSwaggerGen(options =>
 {
