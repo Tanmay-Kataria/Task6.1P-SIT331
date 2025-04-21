@@ -47,5 +47,56 @@ namespace robot_controller_api.Persistence
             }
             return robotCommands;
         }
+        /// <summary>
+        /// Adds a new robot command.
+        /// </summary>
+        /// <param name="command">The robot command to add.</param>
+        /// <returns>The created robot command.</returns>
+        public void AddRobotCommand(RobotCommand command)
+        {
+            using var conn = new NpgsqlConnection(_connectionString);
+            conn.Open();
+
+            using var cmd = new NpgsqlCommand(@"
+        INSERT INTO robotcommand (name, description, ismovecommand, createddate, modifieddate)
+        VALUES (@name, @description, @ismovecommand, @createddate, @modifieddate)", conn);
+
+            cmd.Parameters.AddWithValue("name", command.Name);
+            cmd.Parameters.AddWithValue("description", (object?)command.Description ?? DBNull.Value);
+            cmd.Parameters.AddWithValue("ismovecommand", command.IsMoveCommand);
+            cmd.Parameters.AddWithValue("createddate", command.CreatedDate);
+            cmd.Parameters.AddWithValue("modifieddate", command.ModifiedDate);
+
+            cmd.ExecuteNonQuery();
+        }
+        /// <summary>
+        /// Updates an existing robot command.
+        /// </summary>
+        /// <param name="id">The ID of the command to update.</param>
+        /// <param name="command">The updated robot command.</param>
+        /// <returns>No content if successful, or NotFound if the ID doesn't exist.</returns>
+
+        public bool UpdateRobotCommand(int id, RobotCommand command)
+        {
+            using var conn = new NpgsqlConnection(_connectionString);
+            conn.Open();
+
+            using var cmd = new NpgsqlCommand(@"
+        UPDATE robotcommand 
+        SET name = @name,
+            description = @description,
+            ismovecommand = @ismovecommand,
+            modifieddate = @modifieddate
+        WHERE id = @id", conn);
+
+            cmd.Parameters.AddWithValue("id", id);
+            cmd.Parameters.AddWithValue("name", command.Name);
+            cmd.Parameters.AddWithValue("description", (object?)command.Description ?? DBNull.Value);
+            cmd.Parameters.AddWithValue("ismovecommand", command.IsMoveCommand);
+            cmd.Parameters.AddWithValue("modifieddate", command.ModifiedDate);
+
+            return cmd.ExecuteNonQuery() > 0;
+        }
+        
     }
 }

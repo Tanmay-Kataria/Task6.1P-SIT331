@@ -1,0 +1,467 @@
+{
+	"id": "caabf1a1-35a0-46dc-baa9-32cb9679b4c2",
+	"name": "SIT331 7.1PCD",
+	"timestamp": "2025-04-21T10:12:04.140Z",
+	"collection_id": "41968943-4808ad63-9928-4b56-93ba-1eb50ec0de48",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 20,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2025-04-21T10:11:53.765Z",
+	"totalFail": 13,
+	"results": [
+		{
+			"id": "d9c6a0e6-5784-4273-8144-7740713c0fb2",
+			"name": "readMap",
+			"url": "localhost:5000/api/maps",
+			"time": 3853,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response body is not empty": true,
+				"Response is an array": true,
+				"Each command has required properties": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is an array": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Each command has required properties": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				3853
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response body is not empty": true,
+					"Response is an array": true,
+					"Each command has required properties": true
+				}
+			]
+		},
+		{
+			"id": "814ad6d1-cb62-418b-a691-93d22803dcb6",
+			"name": "readCommands Copy",
+			"url": "localhost:5215/api/robot-commands",
+			"time": 821,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response body is not empty": true,
+				"Response is an array": true,
+				"Each command has required properties": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is an array": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Each command has required properties": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				821
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response body is not empty": true,
+					"Response is an array": true,
+					"Each command has required properties": true
+				}
+			]
+		},
+		{
+			"id": "1f06b7cc-551e-43fa-bf91-56b964218433",
+			"name": "readCommand",
+			"url": "localhost:5215/api/robot-commands/1",
+			"time": 896,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response body is not empty": true,
+				"Response is an object": true,
+				"Object has required properties": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Object has required properties": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				896
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response body is not empty": true,
+					"Response is an object": true,
+					"Object has required properties": true
+				}
+			]
+		},
+		{
+			"id": "31bb0933-d7d3-4fa9-85fe-a94ca213e93b",
+			"name": "readCommandNonExistent",
+			"url": "localhost:5215/api/robot-commands/10",
+			"time": 549,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code is 404": true
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				549
+			],
+			"allTests": [
+				{
+					"Status code is 404": true
+				}
+			]
+		},
+		{
+			"id": "376d6db9-2e53-4b03-aa10-4b0dedf2f9e0",
+			"name": "createCommand",
+			"url": "localhost:5215/api/robot-commands",
+			"time": 444,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 201": false,
+				"Response body is not empty": true,
+				"Response is an object": true,
+				"Response contains correct properties": false,
+				"Location header points to new resource": false
+			},
+			"testPassFailCounts": {
+				"Status code is 201": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Response body is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response contains correct properties": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Location header points to new resource": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				444
+			],
+			"allTests": [
+				{
+					"Status code is 201": false,
+					"Response body is not empty": true,
+					"Response is an object": true,
+					"Response contains correct properties": false,
+					"Location header points to new resource": false
+				}
+			]
+		},
+		{
+			"id": "cad6ffc4-9083-4b0e-9298-1dae7ddca27f",
+			"name": "updateCommand",
+			"url": "localhost:5215/api/robot-commands/1",
+			"time": 423,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Status code is 200": false,
+				"Response body is not empty": false,
+				"Response is an object": false,
+				"Updated data matches request": false
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Response body is not empty": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Response is an object": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Updated data matches request": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				423
+			],
+			"allTests": [
+				{
+					"Status code is 200": false,
+					"Response body is not empty": false,
+					"Response is an object": false,
+					"Updated data matches request": false
+				}
+			]
+		},
+		{
+			"id": "292201b9-668e-415d-a92b-ef3508de32a5",
+			"name": "createMap",
+			"url": "localhost:5215/api/maps",
+			"time": 430,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status code is 201": true,
+				"Response body is not empty": true,
+				"Response is an object": true,
+				"Response contains correct properties": false,
+				"Location header points to new resource": false
+			},
+			"testPassFailCounts": {
+				"Status code is 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response contains correct properties": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Location header points to new resource": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				430
+			],
+			"allTests": [
+				{
+					"Status code is 201": true,
+					"Response body is not empty": true,
+					"Response is an object": true,
+					"Response contains correct properties": false,
+					"Location header points to new resource": false
+				}
+			]
+		},
+		{
+			"id": "3215cafa-badd-4f1e-b57c-a2adfefe64a1",
+			"name": "moveCommands",
+			"url": "localhost:5215/api/robot-commands/move",
+			"time": 380,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code is 201": false
+			},
+			"testPassFailCounts": {
+				"Status code is 201": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				380
+			],
+			"allTests": [
+				{
+					"Status code is 201": false
+				}
+			]
+		},
+		{
+			"id": "2d0b815d-8b60-4001-a397-3087ec710e95",
+			"name": "deleteCommand",
+			"url": "localhost:5215/api/robot-commands/3",
+			"time": 375,
+			"responseCode": {
+				"code": 405,
+				"name": "Method Not Allowed"
+			},
+			"tests": {
+				"Status code is 204": false,
+				"Response body is empty": true,
+				"Status code is 404": false,
+				"Status code is valid": false,
+				"Validate response body": true
+			},
+			"testPassFailCounts": {
+				"Status code is 204": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Response body is empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 404": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Status code is valid": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Validate response body": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				375
+			],
+			"allTests": [
+				{
+					"Status code is 204": false,
+					"Response body is empty": true,
+					"Status code is 404": false,
+					"Status code is valid": false,
+					"Validate response body": true
+				}
+			]
+		},
+		{
+			"id": "957f4172-f959-46d4-8674-4c49cf7aba9d",
+			"name": "addUser",
+			"url": "localhost:5215/users",
+			"time": 1001,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				1001
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 9172,
+	"collection": {
+		"requests": [
+			{
+				"id": "d9c6a0e6-5784-4273-8144-7740713c0fb2",
+				"method": "GET"
+			},
+			{
+				"id": "814ad6d1-cb62-418b-a691-93d22803dcb6",
+				"method": "GET"
+			},
+			{
+				"id": "1f06b7cc-551e-43fa-bf91-56b964218433",
+				"method": "GET"
+			},
+			{
+				"id": "31bb0933-d7d3-4fa9-85fe-a94ca213e93b",
+				"method": "GET"
+			},
+			{
+				"id": "376d6db9-2e53-4b03-aa10-4b0dedf2f9e0",
+				"method": "POST"
+			},
+			{
+				"id": "cad6ffc4-9083-4b0e-9298-1dae7ddca27f",
+				"method": "PUT"
+			},
+			{
+				"id": "292201b9-668e-415d-a92b-ef3508de32a5",
+				"method": "POST"
+			},
+			{
+				"id": "3215cafa-badd-4f1e-b57c-a2adfefe64a1",
+				"method": "GET"
+			},
+			{
+				"id": "2d0b815d-8b60-4001-a397-3087ec710e95",
+				"method": "DELETE"
+			},
+			{
+				"id": "957f4172-f959-46d4-8674-4c49cf7aba9d",
+				"method": "POST"
+			}
+		]
+	}
+}

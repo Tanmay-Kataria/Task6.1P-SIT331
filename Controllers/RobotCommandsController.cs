@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace robot_controller_api.Controllers
 {
-    [Route("api/robotcommands")]
+    [Route("api/robot-commands")]
     [ApiController]
     public class RobotCommandsController : ControllerBase
     {
@@ -28,5 +28,37 @@ namespace robot_controller_api.Controllers
         {
             return _dataAccess.GetRobotCommands();
         }
+
+        [HttpGet("{id}")]
+        public ActionResult<RobotCommand> GetRobotCommandById(int id)
+        {
+            var robotCommand = _dataAccess.GetRobotCommands().FirstOrDefault(rc => rc.Id == id);
+            if (robotCommand == null)
+            {
+                return NotFound();
+            }
+            return Ok(robotCommand);
+        }
+        [HttpPost]
+        public IActionResult AddRobotCommand([FromBody] RobotCommand command)
+        {
+            command.CreatedDate = DateTime.UtcNow;
+            command.ModifiedDate = DateTime.UtcNow;
+
+            _dataAccess.AddRobotCommand(command);
+            return CreatedAtAction(nameof(GetRobotCommandById), new { id = command.Id }, command);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateRobotCommand(int id, [FromBody] RobotCommand command)
+        {
+            command.ModifiedDate = DateTime.UtcNow;
+            var updated = _dataAccess.UpdateRobotCommand(id, command);
+            if (!updated)
+                return NotFound();
+
+            return NoContent();
+        }
+        
     }
 }

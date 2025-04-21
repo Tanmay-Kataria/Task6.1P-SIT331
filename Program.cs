@@ -3,6 +3,9 @@ using Microsoft.OpenApi.Models;
 using System.Reflection;
 using robot_controller_api.Authentication;
 using Microsoft.AspNetCore.Authentication; // Needed for AuthenticationSchemeOptions
+using System.Security.Claims; // Needed for ClaimTypes
+using Microsoft.EntityFrameworkCore.SqlServer; // Needed for UseSqlServer
+using Microsoft.EntityFrameworkCore; // Needed for DbContext
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,10 +16,15 @@ builder.Services.AddScoped<RobotCommandDataAccess>(); // Register the RobotComma
 builder.Services.AddScoped<MapDataAccess>(); // Register the MapDataAccess service
 builder.Services.AddScoped<UserDataAccess>();
 
-// Register DbContext if not already registered (example):
-// builder.Services.AddDbContext<AppDbContext>(options =>
-//     options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
 
+// Add this line to register UserDataAccess as a DbContext
+builder.Services.AddDbContext<UserDataAccess>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+// Remove the manual constructor override:
+builder.Services.AddScoped<RobotCommandDataAccess>(); 
+builder.Services.AddScoped<MapDataAccess>(); 
 builder.Services.AddAuthentication("BasicAuthentication")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(
         "BasicAuthentication", options => { });
@@ -63,10 +71,8 @@ app.UseRouting();
 app.UseAuthentication(); // Enable authentication middleware
 app.UseAuthorization();  // Enable authorization middleware
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers(); // Map controller endpoints
-});
+app.MapControllers();
+
 
 // Run the application.
 app.Run();

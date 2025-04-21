@@ -15,12 +15,13 @@ public class RobotCommand
     /// <summary>
     /// Gets or sets the name of the robot command.
     /// </summary>
-    public string Name { get; set; }    
+    public string Name { get; set; } = null!;   
 
     /// <summary>
     /// Gets or sets the description of the robot command. This property is optional.
     /// </summary>
-    public string? Description { get; set; }
+    public string? Description { get; set; } = null!;   
+
 
     /// <summary>
     /// Gets or sets a value indicating whether the command is a movement command.
@@ -84,13 +85,13 @@ public class RobotCommand
     /// <param name="isMoveCommand">Indicates whether the command is a movement command.</param>
     /// <param name="description">An optional description of the robot command.</param>
     [JsonConstructor]
-    public RobotCommand(int id, string name, bool isMoveCommand, string? description = null)
+    public RobotCommand(int id, string name, bool isMoveCommand = false, string? description = null)
     {
         Id = id;
         Name = name;
         IsMoveCommand = isMoveCommand;
-        CreatedDate = DateTime.Now;
-        ModifiedDate = DateTime.Now;
+        CreatedDate = DateTime.UtcNow;
+        ModifiedDate = DateTime.UtcNow;
         Description = description;
     }
 

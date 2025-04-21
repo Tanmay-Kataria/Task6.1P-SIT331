@@ -54,8 +54,8 @@ namespace robot_controller_api.Controllers
             user.PasswordHash = pwHash;
             
             // Set created and modified dates.
-            user.CreatedDate = DateTime.Now;
-            user.ModifiedDate = DateTime.Now;
+            user.CreatedDate = DateTime.UtcNow;
+            user.ModifiedDate = DateTime.UtcNow;
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
@@ -75,7 +75,7 @@ namespace robot_controller_api.Controllers
             user.LastName = updatedUser.LastName;
             user.Description = updatedUser.Description;
             user.Role = updatedUser.Role;
-            user.ModifiedDate = DateTime.Now;
+            user.ModifiedDate = DateTime.UtcNow;
             
             await _context.SaveChangesAsync();
             return NoContent();
@@ -105,7 +105,7 @@ namespace robot_controller_api.Controllers
             // Update email and hash the new password using BCrypt.
             user.Email = login.Email;
             user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(login.Password);
-            user.ModifiedDate = DateTime.Now;
+            user.ModifiedDate = DateTime.UtcNow;
 
             await _context.SaveChangesAsync();
             return NoContent();
